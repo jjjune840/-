@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>효율적으로 AI를 쓸 수 있는 방법 - 인포그래픽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        /* Custom CSS */
+        body { 
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; 
+            background-color: #F4F7F9; /* 기본 배경 */
+            color: #263238; /* Dark Text */
+        }
+        .chart-container { 
+            position: relative; 
+            /* height and width will be set by Tailwind, e.g., h-72 md:h-80 lg:h-96 */
+        }
+        .section-title { 
+            color: #2A62B6; /* Primary Blue */
+            border-bottom: 2px solid #4ECDC4; /* Secondary Teal */
+            padding-bottom: 0.5rem; 
+            margin-bottom: 1.5rem; /* Increased margin for better separation */
+            font-size: 1.75rem; /* Slightly larger section titles */
+            font-weight: 700;
+        }
+        .card { 
+            background-color: #FFFFFF; /* Light Background for cards */
+            border-radius: 0.75rem; /* More rounded corners */
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.07); /* Softer shadow */
+            padding: 1.5rem; 
+            margin-bottom: 2rem; /* Increased margin for better separation */
+        }
+        .keyword { 
+            background-color: #E0F2FE; /* Supporting Light Blue */
+            color: #2A62B6; /* Primary Blue */
+            padding: 0.35rem 0.85rem; 
+            border-radius: 0.375rem; /* md rounded */
+            display: inline-block; 
+            margin: 0.25rem; 
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: transform 0.2s ease-in-out;
+        }
+        .keyword:hover {
+            transform: translateY(-2px);
+        }
+        h1, h2, h3, h4 { 
+            font-weight: 600; /* Consistent font weight for headers */
+        }
+        /* Chart.js Tooltip Customization */
+        .chartjs-tooltip {
+            opacity: 1;
+            position: absolute;
+            background: rgba(38, 50, 56, 0.9); /* Dark Text with alpha */
+            color: white;
+            border-radius: 0.375rem; /* md rounded */
+            padding: 0.75rem;
+            font-size: 0.875rem; /* text-sm */
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            pointer-events: none; /* Allow clicks to pass through if needed */
+            transition: all .1s ease;
+        }
+        .chartjs-tooltip-key {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            border-radius: 2px;
+        }
+        /* Icon styles (using simple CSS for icons if needed, or FontAwesome if allowed) */
+        .icon-bullet::before {
+            content: "📊"; /* Example emoji icon */
+            margin-right: 0.5rem;
+            color: #4ECDC4; /* Secondary Teal */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="bg-[#2A62B6] text-white py-10 px-4 text-center rounded-b-xl shadow-xl mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold">효율적으로 AI를 쓸 수 있는 방법</h1>
+        <p class="text-lg md:text-xl mt-3 opacity-90">미림마이스터고 소프트웨어과 1학년 3반 학생 대상 공동 조사 보고서 요약</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-6 lg:p-8">
+        <section id="motivation-purpose" class="card">
+            <h2 class="section-title">1. 조사 동기와 목적</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#2A62B6]">가. 조사 동기</h3>
+                    <p class="text-gray-700 leading-relaxed">우리 반 학생들이 AI를 더 잘 활용하도록 돕고 싶어 조사를 계획했다.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#2A62B6]">나. 조사 목적</h3>
+                    <p class="text-gray-700 leading-relaxed">학생들의 AI 활용 현황을 파악하고 효율적인 사용법을 제시하여, 학생들이 학습에 AI를 효과적으로 활용하도록 돕고자 하여 조사를 하였다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="research-plan" class="card">
+            <h2 class="section-title">2. 조사 계획</h2>
+            <ul class="list-none text-gray-700 space-y-3">
+                <li class="flex items-center"><span class="text-[#4ECDC4] text-2xl mr-3">🗓️</span><strong>조사 기간:</strong> 2025년 05월 15일</li>
+                <li class="flex items-center"><span class="text-[#4ECDC4] text-2xl mr-3">👥</span><strong>조사 대상:</strong> 미림마이스터고 소프트웨어과 1학년 3반 학생 17명</li>
+                <li class="flex items-center"><span class="text-[#4ECDC4] text-2xl mr-3">📝</span><strong>조사 방법:</strong> 설문조사, 인터뷰</li>
+            </ul>
+        </section>
+
+        <section id="research-results" class="mb-8">
+            <h2 class="section-title text-center">3. 조사 결과</h2>
+
+            <div class="card mb-8">
+                <h3 class="text-2xl font-semibold mb-6 text-center text-[#2A62B6]">가. 설문 조사 결과</h3>
+                <p class="text-center text-gray-600 mb-8">학생 17명을 대상으로 AI 활용에 대한 설문 조사를 진행했다.</p>
+
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                    <article class="p-6 border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <h4 class="text-lg font-semibold mb-1 text-gray-800">AI 효과적 사용 여부</h4>
+                        <p class="text-xs text-gray-500 mb-3">"귀하는 인공지능(AI)을 효과적으로 사용하고 있다고 생각하십니까?"</p>
+                        <div class="chart-container w-full max-w-xs mx-auto h-64 md:h-72">
+                            <canvas id="surveyChart1"></canvas>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-700 italic"><strong>주목할 만한 내용:</strong> AI를 효과적으로 사용하고 있다고 생각하는 학생이 다수였다.</p>
+                    </article>
+
+                    <article class="p-6 border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br from-teal-50 to-cyan-50">
+                        <h4 class="text-lg font-semibold mb-1 text-gray-800">학습/과제 질 향상 기여도</h4>
+                         <p class="text-xs text-gray-500 mb-3">"AI 사용이 학습 및 과제 결과물의 '질'을 얼마나 향상시켜 준다고 생각하십니까?"</p>
+                        <div class="chart-container w-full max-w-xs mx-auto h-64 md:h-72">
+                            <canvas id="surveyChart2"></canvas>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-700 italic"><strong>주목할 만한 내용:</strong> '매우 향상' 응답이 예상보다 적어 인상적이었다.</p>
+                    </article>
+
+                    <article class="p-6 border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-pink-50">
+                        <h4 class="text-lg font-semibold mb-1 text-gray-800">AI 사용 목적 달성 효율성</h4>
+                        <p class="text-xs text-gray-500 mb-3">"AI 도구 사용 목적 달성에 AI가 얼마나 효율적이라고 느끼십니까?"</p>
+                        <div class="chart-container w-full max-w-xs mx-auto h-64 md:h-72">
+                            <canvas id="surveyChart3"></canvas>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-700 italic"><strong>주목할 만한 내용:</strong> 대부분의 학생이 AI 사용으로 효율이 향상된다고 느꼈다.</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-6 text-center text-[#2A62B6]">나. 인터뷰 결과</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <article class="p-6 border border-gray-200 rounded-xl shadow-lg bg-blue-50 hover:shadow-xl transition-shadow duration-300">
+                        <h4 class="text-xl font-semibold mb-3 text-gray-800">인터뷰 1: 노가우 학생</h4>
+                        <p class="text-sm text-gray-600 mb-3"><strong>주요 키워드:</strong> <span class="keyword">도움</span> <span class="keyword">대신</span> <span class="keyword">편함</span> <span class="keyword">과제</span></p>
+                        <p class="text-gray-700 leading-relaxed"><strong>주목할 만한 내용:</strong> 생성형 AI가 생각 표현을 도와주고, 자료 검색 및 정리에 편리함을 느낀다고 응답했다. 주로 과제 수행 시 AI를 활용한다고 한다.</p>
+                    </article>
+
+                    <article class="p-6 border border-gray-200 rounded-xl shadow-lg bg-teal-50 hover:shadow-xl transition-shadow duration-300">
+                        <h4 class="text-xl font-semibold mb-3 text-gray-800">인터뷰 2: 윤기진 학생</h4>
+                        <p class="text-sm text-gray-600 mb-3"><strong>주요 키워드:</strong> <span class="keyword">알려줘</span> <span class="keyword">모르는 정보</span> <span class="keyword">자료</span></p>
+                        <p class="text-gray-700 leading-relaxed"><strong>주목할 만한 내용:</strong> 생성형 AI를 통해 새로운 정보를 습득하며, 특정 정보를 얻기 위해 "(알고 싶은 정보)를 알려줘" 형식의 프롬프트를 사용한다고 밝혔다.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion-recommendation" class="card">
+            <h2 class="section-title">4. 결론 및 제언</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#2A62B6]">가. 조사 결과 종합 및 주요 발견점</h3>
+                    <p class="text-gray-700 leading-relaxed">설문과 인터뷰를 통해 학생들은 AI를 학습에 효과적으로 활용하고 있으며, 특히 정보 탐색과 과제 수행 시 효율성과 질 향상에 도움을 받고 있음을 확인했다. 다수의 학생이 AI가 목표 달성에 실질적인 도움을 준다고 느끼고 있었고, 인터뷰에서는 AI가 복잡한 표현을 대신해주고 빠르게 자료를 정리해주는 점이 편리하다는 의견이 많았다.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#2A62B6]">나. 조사를 통해 새롭게 알게 된 점 및 느낀 점</h3>
+                    <p class="text-gray-700 leading-relaxed">AI는 단순한 정보 제공 도구를 넘어서, 표현이 어려운 사람에게는 생각을 정리하고 전달하는 데 큰 도움이 되는 역할을 한다는 점을 알게 되었다. 특히 프롬프트를 어떻게 입력하느냐에 따라 결과가 달라진다는 사실도 인상 깊었다.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#2A62B6]">다. 제언 및 우리의 다짐</h3>
+                    <p class="text-gray-700 leading-relaxed mb-3">앞으로 우리는 AI를 더 효과적으로 활용하기 위해 다음과 같은 노력을 할 것이다:</p>
+                    <ul class="list-none space-y-2 pl-1">
+                        <li class="flex items-start"><span class="text-[#4ECDC4] text-xl mr-2 pt-1">💡</span><span>프롬프트를 잘 쓰는 능력 기르기</span></li>
+                        <li class="flex items-start"><span class="text-[#4ECDC4] text-xl mr-2 pt-1">🧐</span><span>AI 정보를 비판적으로 수용하는 태도 갖기</span></li>
+                        <li class="flex items-start"><span class="text-[#4ECDC4] text-xl mr-2 pt-1">✍️</span><span>AI를 활용해 자기 생각을 명확히 표현하는 연습하기</span></li>
+                    </ul>
+                    <p class="text-gray-700 leading-relaxed mt-4 font-semibold text-[#2A62B6]">AI를 통해 더 나은 학습과 성장을 이루어가겠다.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- <section id="references" class="card">
+            <h2 class="section-title">5. 참고 자료</h2>
+            <p class="text-gray-700">본 보고서 작성에 활용된 참고 자료는 다음과 같다: (내용)</p>
+        </section> -->
+
+    </main>
+
+    <footer class="text-center py-8 bg-gray-800 text-gray-400 text-sm mt-12">
+        <p>&copy; 2025 미림마이스터고 소프트웨어과 1학년 3반. All Rights Reserved.</p>
+        <p class="mt-1">본 인포그래픽은 학생 공동 조사 보고서를 기반으로 AI에 의해 생성되었다.</p>
+    </footer>
+
+    <script>
+        // Utility function to wrap text for chart labels if needed, or use Chart.js built-in features
+        function formatLabel(str, maxWidthPerLine = 10) { // Adjusted default for better readability in charts
+            if (typeof str !== 'string') return [String(str)]; // Ensure string input
+            const lines = [];
+            let currentLine = "";
+            // Split by common Korean word break points or simply by length
+            // This is a simplified approach. For perfect Korean wrapping, a more sophisticated library might be needed.
+            // However, for chart labels, often short phrases are used.
+            // If a label is like "매우 그렇지 않다", it's better to split it into "매우 그렇지", "않다"
+            // For simplicity, we'll split by spaces if present, otherwise by length.
+            const words = str.includes(' ') ? str.split(' ') : str.match(new RegExp(`.{1,${maxWidthPerLine}}`, 'g')) || [str];
+
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidthPerLine && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + " ";
+                } else {
+                    currentLine += word + " ";
+                }
+            });
+            if (currentLine.trim().length > 0) {
+                lines.push(currentLine.trim());
+            }
+            return lines.length > 0 ? lines : [str];
+        }
+
+
+        // Chart.js configurations
+        const chartColors = {
+            primaryBlue: '#2A62B6',
+            secondaryTeal: '#4ECDC4',
+            accentGrey: '#A9A9A9',
+            supportingLightBlue: '#E0F2FE',
+            darkText: '#263238',
+            // More distinct and professional colors for charts
+            chartPalette: ['#5DA5DA', '#FAA43A', '#60BD68', '#F17CB0', '#B2912F', '#B276B2', '#DECF3F', '#4D4D4D']
+        };
+
+        const defaultChartOptions = (type = 'pie') => ({
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 11, family: 'Pretendard' },
+                        color: chartColors.darkText,
+                        padding: 15,
+                        usePointStyle: true,
+                        boxWidth: 10, // Smaller box width
+                    }
+                },
+                tooltip: {
+                    enabled: true, // Keep Chart.js tooltips
+                    backgroundColor: 'rgba(38, 50, 56, 0.9)', // Dark text color from palette
+                    titleFont: { size: 13, family: 'Pretendard', weight: 'bold' },
+                    bodyFont: { size: 12, family: 'Pretendard' },
+                    padding: 10,
+                    cornerRadius: 6,
+                    displayColors: true,
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (context.chart.config.type === 'pie' || context.chart.config.type === 'doughnut') {
+                                label = context.label || '';
+                                const value = context.raw || 0;
+                                const count = context.dataset.dataCounts ? context.dataset.dataCounts[context.dataIndex] : '';
+                                return `${label}: ${value}% (${count}명)`;
+                            } else { // For bar chart
+                                if (label) { label += ': '; }
+                                const count = context.parsed.y !== null ? context.parsed.y : '';
+                                const percentage = context.dataset.dataPercentages ? context.dataset.dataPercentages[context.dataIndex] : '';
+                                return `${label}${count}명 (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 800,
+                easing: 'easeOutQuart'
+            },
+            // Specific options for different chart types
+            ...(type === 'bar' && {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '응답 수 (명)', font: {size: 10, family: 'Pretendard'}, color: chartColors.darkText, padding: {top:0, bottom:5} },
+                        ticks: { 
+                            stepSize: 1, 
+                            font: {size: 10, family: 'Pretendard'}, color: chartColors.darkText,
+                            padding: 5,
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)'}
+                    },
+                    x: {
+                         ticks: { 
+                            font: {size: 10, family: 'Pretendard'}, color: chartColors.darkText,
+                            callback: function(value) { // For bar chart x-axis labels
+                                const label = this.getLabelForValue(value);
+                                return formatLabel(label, 8); // Shorter wrap for x-axis
+                            },
+                            padding: 5,
+                         },
+                         grid: { display: false }
+                    }
+                }
+            }),
+             ...( (type === 'pie' || type === 'doughnut') && {
+                layout: {
+                    padding: 10 // Add some padding around pie/doughnut charts
+                }
+            })
+        });
+
+        // Survey Data
+        const surveyData1 = {
+            labels: ['보통이다', '그렇다', '매우 그렇다'],
+            responses: [5, 7, 5],
+            percentages: [29.4, 41.2, 29.4]
+        };
+        const surveyData2 = {
+            labels: ['보통이다', '향상시켜준다', '매우 향상시켜준다'],
+            responses: [5, 8, 4],
+            percentages: [29.4, 47.1, 23.5]
+        };
+        const surveyData3 = {
+            labels: ['약간 향상되지 않는다', '보통이다', '약간 향상된다', '매우 크게 향상된다'],
+            responses: [1, 2, 7, 7],
+            percentages: [5.9, 11.8, 41.2, 41.2]
+        };
+
+        // Chart Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            Chart.defaults.font.family = 'Pretendard'; // Set global font family for Chart.js
+
+            // Survey Chart 1 (Pie Chart)
+            const ctx1 = document.getElementById('surveyChart1');
+            if (ctx1) {
+                new Chart(ctx1.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: surveyData1.labels, // Chart.js handles label wrapping better in v3+ or use callback
+                        datasets: [{
+                            label: '응답 비율',
+                            data: surveyData1.percentages,
+                            dataCounts: surveyData1.responses,
+                            backgroundColor: chartColors.chartPalette.slice(0, surveyData1.labels.length),
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: defaultChartOptions('pie')
+                });
+            }
+
+            // Survey Chart 2 (Bar Chart)
+            const ctx2 = document.getElementById('surveyChart2');
+            if (ctx2) {
+                new Chart(ctx2.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: surveyData2.labels,
+                        datasets: [{
+                            label: '응답', // Tooltip will combine this with value
+                            data: surveyData2.responses,
+                            dataPercentages: surveyData2.percentages, // For tooltip
+                            backgroundColor: chartColors.chartPalette.slice(0, surveyData2.labels.length).map(color => color + 'CC'), // Add alpha
+                            borderColor: chartColors.chartPalette.slice(0, surveyData2.labels.length),
+                            borderWidth: 1.5,
+                            borderRadius: 5,
+                            hoverBackgroundColor: chartColors.chartPalette.slice(0, surveyData2.labels.length),
+                        }]
+                    },
+                    options: defaultChartOptions('bar')
+                });
+            }
+            
+            // Survey Chart 3 (Doughnut Chart)
+            const ctx3 = document.getElementById('surveyChart3');
+            if (ctx3) {
+                new Chart(ctx3.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: surveyData3.labels,
+                        datasets: [{
+                            label: '응답 비율',
+                            data: surveyData3.percentages,
+                            dataCounts: surveyData3.responses,
+                            backgroundColor: chartColors.chartPalette.slice(0, surveyData3.labels.length),
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2,
+                            hoverOffset: 8,
+                            cutout: '60%' // Makes it a doughnut chart
+                        }]
+                    },
+                    options: defaultChartOptions('doughnut')
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+```
